@@ -1,0 +1,11 @@
+<button class="btn-padrao cartao-save">
+            <div class="perfil-esquerda">
+              <div class="avatar-circulo"></div>
+              <span class="nome-jogador">Rudolph Richardson</span>
+            </div>
+
+            <div class="status-direita">
+              <span class="nivel-texto">Nivelº 67</span>
+              <div class="tempo-badge">Hrs:100 Min:10</div>
+            </div>
+          </button>

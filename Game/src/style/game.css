@@ -1,0 +1,44 @@
+#tela-loading {
+  position: fixed;
+  inset: 0; /* Estica para cobrir a tela toda (top, bottom, left, right = 0) */
+  background-color: #1a1a1a;
+  z-index: 9999; /* Mantém na frente do canvas */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 1s ease; /* Prepara um efeito de sumiço suave */
+}
+
+/* Bolinha giratória (opcional) */
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid #333;
+  border-top: 6px solid #d4af37; /* Dourado combinando com seu menu */
+  border-radius: 50%;
+  animation: girar 1s linear infinite;
+  margin-top: 20px;
+}
+
+@keyframes girar {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+#renderCanvas {
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}

@@ -1,0 +1,92 @@
+@import url("./fonts.css");
+
+* {
+  padding: 0px;
+  margin: 0px;
+}
+body {
+  overflow: hidden;
+}
+
+#title-glitched {
+  grid-column: span 5 / span 5;
+  font-family: "Special Elite", system-ui;
+  font-weight: 400;
+  font-size: 5rem;
+  font-style: normal;
+  background: linear-gradient(
+    180deg,
+    rgba(7, 36, 51, 1) 0%,
+    rgba(87, 154, 199, 1) 50%,
+    rgba(36, 3, 3, 1) 100%
+  );
+
+  /* Cola o degradê estritamente dentro do formato das letras */
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  /* Torna a cor original do texto transparente para o degradê aparecer */
+  -webkit-text-fill-color: transparent;
+}
+
+.menu-container {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+  padding: 50px;
+  box-sizing: border-box;
+  background-image: url("https://i.postimg.cc/hvg1wjzX/tumblr-77f9eea4fadea070320cffd07e157e09-35a85ecf-500.gif");
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+
+.botoes-grid {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+  align-self: center;
+
+  display: grid;
+  gap: 25px;
+}
+
+.botoes-grid button {
+  font-family: "Special Elite", cursive, sans-serif;
+  font-size: 2rem;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  color: #111;
+  width: 600px;
+  height: 100px;
+
+  background: linear-gradient(to right, #b48b11, #f9df7b, #b48b11);
+  background-size: 200% auto;
+  transition: all 0.3s ease;
+  box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.botoes-grid button:hover {
+  background-position: right center;
+  width: 120%;
+}
+
+.icone-engrenagem {
+  position: absolute;
+  bottom: 30px; 
+  right: 30px;  
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+  transition: transform 0.3s ease; 
+}
+
+
+.icone-engrenagem:hover {
+  transform: rotate(90deg) scale(1.2);
+}
+

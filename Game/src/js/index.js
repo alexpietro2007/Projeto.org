@@ -4,8 +4,6 @@ import mapaCorredorSpawn from "./maps/corredorSpawn.js";
 import gerarMapa from "./functions/gerarMapa.js";
 import criarChao from "./functions/criarChao.js";
 
-
-
 const createScene = function () {
   const scene = new BABYLON.Scene(engine);
 
@@ -20,7 +18,7 @@ const createScene = function () {
     scene,
   );
   scene.fogMode = BABYLON.Scene.FOGMODE_LINEAR;
-  const corNevoa = new BABYLON.Color3(0.1, 0.1, 0.1);
+  const corNevoa = new BABYLON.Color3(0, 0, 0);
   scene.fogColor = corNevoa;
 
   // 2. Cria a Câmera FPS (Universalplayer)
@@ -32,7 +30,7 @@ const createScene = function () {
   player.minZ = 0.01;
   player.fov = BABYLON.Tools.ToRadians(90);
   player.attachControl(canvas, true);
-  scene.clearColor = corNevoa;
+  scene.clearColor = new BABYLON.Color3(0, 0, 0);
   // 3. Configura as distâncias (em blocos/unidades 3D)
   scene.fogStart = 2.0; // A que distância do jogador a névoa começa
   scene.fogEnd = 5.0; // A que distância fica impossível ver qualquer coisa
@@ -50,6 +48,17 @@ const createScene = function () {
   player.keysRight.push(68); // D
   gerarMapa(scene, player, mapaCorredorSpawn);
   criarChao(scene, mapaCorredorSpawn);
+  scene.executeWhenReady(() => {
+    const telaLoading = document.getElementById("tela-loading");
+
+    // Inicia o efeito de sumiço (Fade Out)
+    telaLoading.style.opacity = "0";
+
+    // Remove o elemento do HTML após 1 segundo (tempo da transição do CSS)
+    setTimeout(() => {
+      telaLoading.style.display = "none";
+    }, 1000);
+  });
 
   return scene;
 };

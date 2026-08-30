@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solo Nosso</title>
+  <link rel="stylesheet" href="../src/style/menu/main.css" />
+</head>
+
+<body>
+  <main class="menu-container">
+    <h1 id="title-glitched">BackRooms - SoloNosso</h1>
+
+    <nav class="botoes-grid">
+      <button id="continuar">Continuar</button>
+      <button id="novoJogo">Novo Jogo</button>
+      <button id="multiplayer">Multiplayer (wip)</button>
+    </nav>
+    <img id="btn-config" class="icone-engrenagem" src="../src/Images/1297119.svg" alt="Configurações" />
+
+    <dialog id="menu-config">
+      <button id="fechar-config">X</button>
+      <div class="controle-som">
+        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="30">
+      </div>
+    </dialog>
+    <dialog id="menu-novoJogo">
+      <button id="btn-fechar-modal">X</button>
+
+      <div class="modal-conteudo">
+        <button class="btn-padrao">Novo Jogo</button>
+        <button class="btn-padrao">Novo Jogo</button>
+        <button class="btn-padrao">Novo Jogo</button>
+      </div>
+    </dialog>
+
+  </main>
+
+  <audio id="menu-som" src="https://files.catbox.moe/3cnqnd.mp3" autoplay loop></audio>
+  <a href="./game.html">Jogo</a>
+  <script type="module" src="../src/js/scripts/main.js"></script>
+</body>
+
+</html>

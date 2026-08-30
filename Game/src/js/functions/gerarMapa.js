@@ -133,78 +133,84 @@ export default function gerarMapa(scene, camera, arrayDoMapa, offsetZ = 0) {
 
         objetosDesteCorredor.push(parede);
       } else if (idTile === 2) {
-        camera.position = new BABYLON.Vector3(
-          x * tamanhoBloco,
-          2,
-          posicaoZReal,
-        );
-        camera.setTarget(
-          new BABYLON.Vector3(x * tamanhoBloco, 2, posicaoZReal + 100),
-        );
+        // Trava: A câmera só é definida na primeira vez que o jogo carrega (mapa raiz)
+        if (offsetZ === 0) {
+          camera.position = new BABYLON.Vector3(
+            x * tamanhoBloco,
+            2,
+            posicaoZReal,
+          );
+
+          camera.setTarget(
+            new BABYLON.Vector3(x * tamanhoBloco, 2, posicaoZReal + 100),
+          );
+        }
       } else if (idTile === 3 || idTile === 4) {
-        const ancora = BABYLON.MeshBuilder.CreateSphere(
-          "ancora",
-          { diameter: 0.5 },
-          scene,
-        );
-        ancora.position = new BABYLON.Vector3(
-          x * tamanhoBloco,
-          1,
-          posicaoZReal,
-        );
-        ancora.isVisible = false; // Mude para false depois
+      const ancora = BABYLON.MeshBuilder.CreateSphere(
+        "ancora",
+        { diameter: 0.5 },
+        scene,
+      );
+      ancora.position = new BABYLON.Vector3(
+        x * tamanhoBloco,
+        1,
+        posicaoZReal,
+      );
+      ancora.isVisible = false;
 
-        // Colocamos a âncora na lista para ela ser apagada com a sala
-        objetosDesteCorredor.push(ancora);
+      objetosDesteCorredor.push(ancora);
 
-        // 3. O observador da âncora agora é blindado
-        const observer = scene.onBeforeRenderObservable.add(() => {
-          // Se a âncora já foi deletada pelo Garbage Collector, destrói o observador
-          if (ancora.isDisposed()) {
-            scene.onBeforeRenderObservable.remove(observer);
-            return;
+      const observer = scene.onBeforeRenderObservable.add(() => {
+        if (ancora.isDisposed()) {
+          scene.onBeforeRenderObservable.remove(observer);
+          return;
+        }
+
+        if (BABYLON.Vector3.Distance(camera.position, ancora.position) < 12) {
+          // 1. Pega o tamanho do novo mapa que vai ser criado (23)
+          const tamanhoNovoMapa = mapaCorredor.length;
+
+          // 2. Se for para frente (+), usa o tamanho da sala atual. Se for para trás (-), usa o tamanho do novo mapa.
+          let novoOffsetZ =
+            idTile === 3
+              ? offsetZ + tamanhoDesteMapaZ
+              : offsetZ - tamanhoNovoMapa;
+
+          if (!mapasAtivos[novoOffsetZ]) {
+            console.log("Gerando sala no OffsetZ:", novoOffsetZ);
+            gerarMapa(scene, camera, mapaCorredor, novoOffsetZ);
           }
-
-          if (BABYLON.Vector3.Distance(camera.position, ancora.position) < 6) {
-            let novoOffsetZ =
-              idTile === 3
-                ? offsetZ + tamanhoDesteMapaZ
-                : offsetZ - tamanhoDesteMapaZ;
-
-            // Só chama a função se o mapa da frente (ou de trás) não existir ainda
-            if (!mapasAtivos[novoOffsetZ]) {
-              gerarMapa(scene, camera, mapaCorredor, novoOffsetZ);
-            }
-          }
-        });
-      }
-    }
-  }
-
-  // =====================================================
-  // O NOVO GARBAGE COLLECTOR (GC ESPACIAL)
-  // =====================================================
-
-  // Salva esta sala no dicionário usando o offsetZ como "Chave"
-  mapasAtivos[offsetZ] = objetosDesteCorredor;
-
-  // Distância máxima permitida para manter um mapa vivo (Mantém ~3 salas ao seu redor)
-  const limiteDistancia = tamanhoDesteMapaZ * 2.5;
-
-  Object.keys(mapasAtivos).forEach((chaveStr) => {
-    const offsetGravado = parseInt(chaveStr);
-
-    // Se a sala estiver muito longe da sala que acabamos de gerar, delete-a
-    if (Math.abs(offsetGravado - offsetZ) > limiteDistancia) {
-      console.log("GC Apagou a sala na posição:", offsetGravado);
-
-      // Deleta todas as paredes, chão e âncoras da sala antiga
-      mapasAtivos[offsetGravado].forEach((objeto) => {
-        objeto.dispose();
+        }
       });
 
-      // Remove do dicionário
-      delete mapasAtivos[offsetGravado];
-    }
-  });
+    } 
+  }
+}
+
+// =====================================================
+// O NOVO GARBAGE COLLECTOR (GC ESPACIAL)
+// =====================================================
+
+// Salva esta sala no dicionário usando o offsetZ como "Chave"
+mapasAtivos[offsetZ] = objetosDesteCorredor;
+
+// Distância máxima permitida para manter um mapa vivo (Mantém ~3 salas ao seu redor)
+const limiteDistancia = tamanhoDesteMapaZ * 2.5;
+
+Object.keys(mapasAtivos).forEach((chaveStr) => {
+  const offsetGravado = parseInt(chaveStr);
+
+  // Se a sala estiver muito longe da sala que acabamos de gerar, delete-a
+  if (Math.abs(offsetGravado - offsetZ) > limiteDistancia) {
+    console.log("GC Apagou a sala na posição:", offsetGravado);
+
+    // Deleta todas as paredes, chão e âncoras da sala antiga
+    mapasAtivos[offsetGravado].forEach((objeto) => {
+      objeto.dispose();
+    });
+
+    // Remove do dicionário
+    delete mapasAtivos[offsetGravado];
+  }
+});
 }

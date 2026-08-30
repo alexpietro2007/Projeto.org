@@ -1,0 +1,125 @@
+/* Caixa do Modal */
+#menu-novoJogo {
+  background-color: #26221f; /* Tom escuro levemente marrom/cinza */
+  border: 3px solid #d4af37; /* Borda dourada */
+  border-radius: 25px;
+  padding: 60px 40px 40px 40px; /* Padding extra no topo por causa do botão X */
+  width: 800px;
+  max-width: 90vw;
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.01);
+}
+
+/* Fundo escuro atrás do modal */
+#menu-novoJogo::backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Botão X de fechar */
+/* Botão X de fechar */
+#btn-fechar-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  padding: 0;
+  background: #d4af37;
+  color: #aa0c01;
+  border: none;
+
+  /* Força a centralização vertical da linha da fonte */
+  line-height: 32px;
+  text-align: center;
+
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+  &:hover {
+    transform: scale(1.2) rotate(360deg);
+  }
+  /* Se ainda parecer ligeiramente desalinhado por conta da fonte, 
+     ative as duas linhas abaixo e comente o line-height/text-align */
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+/* Container para empilhar os botões */
+.modal-conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* Estilo Base dos Botões Dourados */
+.btn-padrao {
+  font-family: "Special Elite", cursive, sans-serif;
+  font-size: 2rem;
+  padding: 25px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  color: #111;
+  background: linear-gradient(to right, #b48b11, #f9df7b, #b48b11);
+  box-shadow: inset 0px -4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.btn-padrao:hover {
+  transform: scale(1.02);
+}
+
+/* --- Estilos Específicos do Cartão de Save --- */
+
+/* Transforma o 3º botão em um flex container para separar os lados */
+.cartao-save {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+}
+
+.perfil-esquerda {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.avatar-circulo {
+  width: 70px;
+  height: 70px;
+  background-color: #ffb74d; /* Cor laranja clara do ícone */
+  border-radius: 50%;
+  box-shadow: inset 0px -2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.nome-jogador {
+  font-family: sans-serif; /* Muda a fonte para o estilo reto da imagem */
+  font-weight: 900;
+  font-size: 1.6rem;
+}
+
+.status-direita {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  font-family: sans-serif;
+}
+
+.nivel-texto {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.tempo-badge {
+  background-color: #ffb74d;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
