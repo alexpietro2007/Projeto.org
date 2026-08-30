@@ -1,4 +1,6 @@
 @import url(./menu.css);
-@import url(./novoJogo.css);
+@import url(./menuNovoJogo.css);
 @import url(./game.css);
 @import url(./config.css);
+@import url(./novoJogo.css);
+@import url(./fundoModal.css);

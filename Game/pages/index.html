@@ -16,28 +16,40 @@
       <button id="continuar">Continuar</button>
       <button id="novoJogo">Novo Jogo</button>
       <button id="multiplayer">Multiplayer (wip)</button>
+      <button id="login">Login</button>
     </nav>
     <img id="btn-config" class="icone-engrenagem" src="../src/Images/1297119.svg" alt="Configurações" />
 
-    <dialog id="menu-config">
-      <button id="fechar-config">X</button>
+    <dialog id="menu-config" class="fundo-modal">
+      <button id="fechar-config" class="btn-fechar-modal">X</button>
       <div class="controle-som">
         <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="30">
       </div>
     </dialog>
-    <dialog id="menu-novoJogo">
-      <button id="btn-fechar-modal">X</button>
+    <dialog id="menu-novoJogo" class="fundo-modal">
+      <button id="btn-fechar-menu-novoJogo" class="btn-fechar-modal">X</button>
 
-      <div class="modal-conteudo">
-        <button class="btn-padrao">Novo Jogo</button>
-        <button class="btn-padrao">Novo Jogo</button>
-        <button class="btn-padrao">Novo Jogo</button>
+      <!-- Deixe vazio, o JS vai preencher -->
+      <div class="modal-conteudo" id="container-saves">
+        <p style="color: white; text-align: center;">Carregando saves...</p>
       </div>
+    </dialog>
+    <dialog id="novoJogo" class="fundo-modal">
+      <button id="btn-fechar-novojogo" class="btn-fechar-modal">X</button>
+
+    </dialog>
+    <dialog id="modal-login" class="fundo-modal">
+      <button id="modal-fechar-login" class="btn-fechar-modal">X</button>
+      <form action="" method="post">
+        <input type="text" name="Usuario:" id="">
+        <input type="password" name="Senha:" id="">
+        <button type="submit">Logar</button>
+      </form>
     </dialog>
 
   </main>
 
-  <audio id="menu-som" src="https://files.catbox.moe/3cnqnd.mp3" autoplay loop></audio>
+  <audio id="menu-som" src="https://files.catbox.moe/1871sn.ogg" autoplay loop></audio>
   <a href="./game.html">Jogo</a>
   <script type="module" src="../src/js/scripts/main.js"></script>
 </body>
